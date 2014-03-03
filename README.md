@@ -9,7 +9,7 @@ Simple adaptor to allow posting stats to DasBoard.
 ## Config
 Create a `config/dasboard.yml` file in your Rails project which looks like:
 
-```yaml
+```YAML
   production:
     instance: http://<your dasboard instance>
     metrics:
