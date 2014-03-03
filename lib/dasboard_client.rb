@@ -1,14 +1,15 @@
-require 'net/http'
 require 'uri'
+require 'yaml'
+require 'rails'
 
-
-class DasBoard
+class DasboardClient
   def self.load_config
     begin
-      @@config = YAML.load_file(Rails.root.join('config/dasboard.yml'))[Rails.env]
+      config_location = Rails.root.join('config/dasboard.yml')
+      @@config = YAML.load_file(config_location)[Rails.env]
     rescue Exception => err
-      puts "Error loading config"
-      puts err
+      puts config_location
+      throw Exception.new("Error loading DasBoard config from #{config_location}: #{err.message}")
     end
   end
 
@@ -28,4 +29,4 @@ class DasBoard
   end
 end
 
-DasBoard.load_config
+DasboardClient.load_config
